@@ -1,0 +1,4 @@
+Retiro: : Saldo: 500
+Retiro: : 500Nuevo saldo: 500
+Retiro: : 500 Nuevo saldo: 500
+Deposito: : 1000 .Nuevo saldo: 2000
