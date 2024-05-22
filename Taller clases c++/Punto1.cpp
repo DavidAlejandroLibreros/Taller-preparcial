@@ -52,6 +52,7 @@ using namespace std;
 class CuentaDeposito: public Cuenta{
     private:
     double Impuesto;
+    double Tasa_interes_anual;
     void registrartransaccionesnuevacuenta(string tipo, double saldo, double cantidad){
             ofstream archivo("Transacciones.txt", ios::app);
             if (archivo.is_open()){
@@ -64,18 +65,25 @@ class CuentaDeposito: public Cuenta{
             
             
             }
-    public:
-    CuentaDeposito(): Cuenta(), Impuesto(10) {}
-    CuentaDeposito(double saldo_inicial): Cuenta(saldo_inicial), Impuesto(10){}
+    public: // Vamos a suponer que la tasa de interes anual es del 5%
+    CuentaDeposito(): Cuenta(), Impuesto(10), Tasa_interes_anual(0.05) {}
+    CuentaDeposito(double saldo_inicial): Cuenta(saldo_inicial), Impuesto(10), Tasa_interes_anual(0.05){}
     
     void Retirar(double saldo_retirado){
         if(saldo_retirado + Impuesto > Saldo_cuenta()){
             cout << "Saldo insuficiente." << endl;
         } else {
-            double saldo = Saldo_cuenta() - saldo_retirado - Impuesto;
-            cout << saldo << endl;
-
+            double Valor_total_retirado = saldo_retirado + Impuesto;
+            double saldo = Saldo_cuenta() - Valor_total_retirado;
+            registrartransaccionesnuevacuenta("Retiro con impuesto aplicado ", saldo , Valor_total_retirado);
         }
+    }
+    void AplicarInteresAnual(){
+        double interes =  Saldo_cuenta() * Tasa_interes_anual;
+        double saldo = Saldo_cuenta() - interes;
+        registrartransaccionesnuevacuenta("Interes Anual acumulado cobrado", saldo, interes);
+
+
 
 
     }
@@ -87,9 +95,10 @@ class CuentaDeposito: public Cuenta{
 
 int main(){
 
-
+Cuenta Cuenta1(1000);
 CuentaDeposito CuentaADepositar(2000);
-CuentaADepositar.Retirar(600);
+CuentaADepositar.Depositar(1000);
+CuentaADepositar.AplicarInteresAnual();
 return 0;
 
 
