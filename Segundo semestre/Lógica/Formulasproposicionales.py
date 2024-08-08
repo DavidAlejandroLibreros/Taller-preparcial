@@ -91,3 +91,4 @@ C1 = Binario("=", B2, B1)
 print(C1)
 
 print(num_binarios(C1))
+print(num_letras(C1))
