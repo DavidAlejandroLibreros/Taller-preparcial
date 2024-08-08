@@ -40,7 +40,7 @@ def num_Negacion(self):
     elif type(self) == Negacion:
         return 1 + num_Negacion(self.subf)
     elif type(self) == Binario:
-        0 + num_Negacion(self.left) + num_Negacion(self.right)
+        return 0 + num_Negacion(self.left) + num_Negacion(self.right)
 
 setattr(Formula, "Num_negacion", num_Negacion)
 
@@ -70,7 +70,7 @@ def num_binarios(self):
     elif type(self) == Negacion:
         return 0 + num_binarios(self.subf)
     elif type(self) == Binario:
-        1 + num_binarios(self.left) + num_binarios(self.right)
+        return 1 + num_binarios(self.left) + num_binarios(self.right)
 
 setattr(Formula, "num_binarios", num_binarios)
     
